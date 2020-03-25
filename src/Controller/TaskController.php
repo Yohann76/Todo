@@ -45,10 +45,12 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/edit", name="task_edit")
      */
-    public function editAction(Task $task, Request $request)
+    public function editAction(Request $request,$id)
     {
-        $form = $this->createForm(TaskType::class, $task);
 
+        $task = $this->getDoctrine()->getRepository(Task::class)->find($id);
+
+        $form = $this->createForm(TaskType::class, $task);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -68,8 +70,10 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/toggle", name="task_toggle")
      */
-    public function toggleTaskAction(Task $task)
+    public function toggleTaskAction($id)
     {
+        $task = $this->getDoctrine()->getRepository(Task::class)->find($id);
+
         $task->toggle(!$task->isDone());
         $this->getDoctrine()->getManager()->flush();
 
@@ -81,8 +85,10 @@ class TaskController extends AbstractController
     /**
      * @Route("/tasks/{id}/delete", name="task_delete")
      */
-    public function deleteTaskAction(Task $task)
+    public function deleteTaskAction($id)
     {
+        $task = $this->getDoctrine()->getRepository(Task::class)->find($id);
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($task);
         $em->flush();
