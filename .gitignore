@@ -1,16 +1,42 @@
 /app/config/parameters.yml
 /build/
 /phpunit.xml
-/var/*
-!/var/cache
-/var/cache/*
-!var/cache/.gitkeep
-!/var/logs
-/var/logs/*
-!var/logs/.gitkeep
-!/var/sessions
-/var/sessions/*
-!var/sessions/.gitkeep
-!var/SymfonyRequirements.php
+/public/var/*
+!/public/var/cache
+/public/var/cache/*
+!public/var/cache/.gitkeep
+!/public/var/logs
+/public/var/logs/*
+!public/var/logs/.gitkeep
+!/public/var/sessions
+/public/var/sessions/*
+!public/var/sessions/.gitkeep
+!public/var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+.idea/
+
+###> symfony/phpunit-bridge ###
+.phpunit
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
+
+/.env.local
+/.env.local.php
+/.env.*.local
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/public/var/
+/vendor/
+/var/
+###< symfony/framework-bundle ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###
