@@ -4,12 +4,16 @@ namespace App\DataFixtures;
 
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 
 class UserFixtures extends Fixture
 {
+    public const YOHANN = 'YOHANN';
+    public const KEVIN = 'KEVIN';
+    public const FABIEN = 'FABIEN';
 
     private $passwordEncoder;
 
@@ -22,26 +26,28 @@ class UserFixtures extends Fixture
     {
 
         // Create User
-        $user = new User();
-        $user->setUsername('Yohann');
-        $user->setEmail('yohanndurand76@gmail.com');
-        $user->setPassword($this->passwordEncoder->encodePassword($user,'dev'));
-        $manager->persist($user);
+        $yohann = new User();
+        $yohann->setUsername('Yohann');
+        $yohann->setEmail('yohanndurand76@gmail.com');
+        $yohann->setPassword($this->passwordEncoder->encodePassword($yohann,'dev'));
+        $this->addReference('YOHANN',$yohann);
+        $manager->persist($yohann);
 
-        $user1 = new User();
-        $user1->setUsername('Yohann1');
-        $user1->setEmail('yohanndurand1@gmail.com');
-        $user1->setPassword($this->passwordEncoder->encodePassword($user1,'dev'));
-        $manager->persist($user1);
+        $kevin = new User();
+        $kevin->setUsername('Kevin');
+        $kevin->setEmail('kevin@gmail.com');
+        $kevin->setPassword($this->passwordEncoder->encodePassword($kevin,'dev'));
+        $this->addReference('KEVIN',$kevin);
+        $manager->persist($kevin);
 
-        $user2 = new User();
-        $user2->setUsername('Yohann2');
-        $user2->setEmail('yohanndurand2@gmail.com');
-        $user2->setPassword($this->passwordEncoder->encodePassword($user2,'dev'));
-        $manager->persist($user2);
+        $fabien = new User();
+        $fabien->setUsername('Fabien');
+        $fabien->setEmail('fabien@gmail.com');
+        $fabien->setPassword($this->passwordEncoder->encodePassword($fabien,'dev'));
+        $this->addReference('FABIEN',$fabien);
+        $manager->persist($fabien);
 
         $manager->flush();
 
     }
-
 }

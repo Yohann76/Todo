@@ -17,9 +17,9 @@
                     <p>{{ task.content }}</p>
                     <!-- Todo : Author Task -->
                     {% if task.author.username is not defined  %}
-                        <p> Annonyme </p>
+                        <p> Autheur : Annonyme </p>
                     {% else %}
-                        <p>{{ task.author.username}}</p>
+                        <p> Autheur : {{ task.author.username}}</p>
                     {% endif %}
 
                     <!-- Todo : end Author Task -->
