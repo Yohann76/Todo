@@ -39,7 +39,6 @@
                         {% endif %}
                     {% endif %}
 
-                    <!-- Todo suppression tache anonyme par admin -->
                     {% if task.author.username is not defined and is_granted('ROLE_ADMIN') %}
                         <form action="{{ path('task_delete', {'id' : task.id }) }}">
                             <button class="btn btn-danger btn-sm pull-right">Supprimer</button>
