@@ -30,6 +30,7 @@ class UserFixtures extends Fixture
         $yohann->setUsername('Yohann');
         $yohann->setEmail('yohanndurand76@gmail.com');
         $yohann->setPassword($this->passwordEncoder->encodePassword($yohann,'dev'));
+        $yohann->setRoles(["ROLE_ADMIN"]);
         $this->addReference('YOHANN',$yohann);
         $manager->persist($yohann);
 
@@ -37,6 +38,7 @@ class UserFixtures extends Fixture
         $kevin->setUsername('Kevin');
         $kevin->setEmail('kevin@gmail.com');
         $kevin->setPassword($this->passwordEncoder->encodePassword($kevin,'dev'));
+        $kevin->setRoles(["ROLE_USER"]);
         $this->addReference('KEVIN',$kevin);
         $manager->persist($kevin);
 
@@ -44,6 +46,7 @@ class UserFixtures extends Fixture
         $fabien->setUsername('Fabien');
         $fabien->setEmail('fabien@gmail.com');
         $fabien->setPassword($this->passwordEncoder->encodePassword($fabien,'dev'));
+        $fabien->setRoles(["ROLE_USER"]);
         $this->addReference('FABIEN',$fabien);
         $manager->persist($fabien);
 
