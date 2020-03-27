@@ -38,7 +38,7 @@
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        <!-- Create user if ROLE_ADMIN --> 
+        <!-- Create user if ROLE_ADMIN -->
         {% if is_granted('ROLE_ADMIN') %}
 
             <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
