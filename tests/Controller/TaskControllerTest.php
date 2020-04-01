@@ -9,7 +9,7 @@ use Symfony\Component\Form\Test\TypeTestCase;
 
 class TaskControllerTest extends BaseWebTest
 {
-    public function testListAction(){
+    public function testListActionPage(){
         $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/tasks');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
@@ -37,6 +37,19 @@ class TaskControllerTest extends BaseWebTest
     public function testEditActionTaskPage(){
         $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/tasks/86/edit');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testForEditActionTask(){
+        $client = $this->login('Yohann','dev') ;
+        $crawler = $client->request('GET', '/tasks/86/edit');
+
+        $form = $crawler->selectButton('Modifier')->form();
+        $form['task[title]'] = 'TaskEdit';
+        $form['task[content]'] = 'Symfony rocks!Edit';
+        $crawler = $client->submit($form);
+
+        $client->followRedirect();
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
