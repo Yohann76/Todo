@@ -4,19 +4,19 @@ namespace App\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-
 class BaseWebTest extends WebTestCase
 {
-    public function testGetLoginPage(){
-        $client = $this->login('yohann','dev') ;
+    // 200
+    public function testGetLoginPageSucces(){
+        $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/login');
-        $this->assertResponseIsSuccessful();
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
     public function login($username,$password) {
         return static::createClient([], [
             'PHP_AUTH_USER' => $username,
-            'PHP_AUTH_PW' => $password
+            'PHP_AUTH_PW' => $password,
         ]);
     }
 }

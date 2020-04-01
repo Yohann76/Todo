@@ -4,11 +4,23 @@ namespace App\Tests\Controller;
 
 use App\Tests\BaseWebTest;
 
-class TaskControllerTestControllerTestControllerTest extends BaseWebTest
+class TaskControllerTest extends BaseWebTest
 {
+    // if Admin or user
     public function testListAction(){
-        $client = $this->login('yohann','dev') ;
+        $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/tasks');
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // redirect
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
+    // if Admin or user
+    public function testGetCreateTaskPage(){
+        $client = $this->login('Yohann','dev') ;
+        $client->request('GET', '/tasks/create');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+
+
+
+
 }
