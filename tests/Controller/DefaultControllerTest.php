@@ -2,17 +2,23 @@
 
 namespace App\Tests\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use App\Tests\BaseWebTest;
 
-class DefaultControllerTest extends WebTestCase
+class DefaultControllerTest extends BaseWebTest
 {
-    public function testIndex()
+    // redirect if no connect ( 302 )
+    public function testIndexActionNoConnect()
     {
         $client = static::createClient();
+        $client->request('GET', '/');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // redirect
+    }
 
-        $crawler = $client->request('GET', '/');
-
+    // valid if user/admin connect ( 200 )
+    public function testIndexActionConnect()
+    {
+        $client = $this->login('Yohann','dev');
+        $client->request('GET', '/');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertContains('Welcome to Symfony', $crawler->filter('#container h1')->text());
     }
 }

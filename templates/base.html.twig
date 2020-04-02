@@ -40,8 +40,8 @@
     <div class="row">
         <!-- Create user if ROLE_ADMIN -->
         {% if is_granted('ROLE_ADMIN') %}
-
             <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
+            <a href="{{ path('user_list') }}" class="btn btn-primary">Liste des utilisateurs</a>
         {% else %}
             <p> Vous devez etre administrateur pour créer un utilisateur </p>
         {% endif %}
@@ -55,6 +55,7 @@
             <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
         {% endif %}
     </div>
+    <br/>
 
     <div class="row">
         <div class="col-md-12">

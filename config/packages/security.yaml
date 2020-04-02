@@ -1,11 +1,12 @@
 security:
     encoders:
-        App\Entity\User: bcrypt
+        App\Entity\User:
+            algorithm: bcrypt
 
     providers:
-        doctrine:
+        app_user_provider:
             entity:
-                class: App:User
+                class: App\Entity\User
                 property: username
 
     firewalls:
@@ -14,7 +15,8 @@ security:
             security: false
 
         main:
-            anonymous: ~
+            http_basic: ~
+            anonymous: lazy
             pattern: ^/
             form_login:
                 login_path: login
@@ -27,3 +29,6 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/users, roles: ROLE_ADMIN }
         - { path: ^/, roles: ROLE_USER }
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_ADMIN,ROLE_USER]
