@@ -65,6 +65,9 @@ the following links you may be useful
 
 ## Other information 
 
+You can see performance in BlackFire : 
+https://blackfire.io/profiles/3fcbf96e-442b-4003-9795-46f61c865335/graph
+
 The graphical data model is accessible in the SQL file. You can also find the UML shema in the respective file
 License : Free
 
