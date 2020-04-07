@@ -2,23 +2,57 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\User;
 use App\Tests\BaseWebTest;
 
 class UserControllerTest extends BaseWebTest
 {
-    public function testUserListActionWithAdminRoles(){
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    private $entityManager;
+
+    protected function setUp(): void
+    {
+        $kernel = self::bootKernel();
+        $this->entityManager = $kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
+        self::ensureKernelShutdown();
+    }
+
+    private function searchUser()
+    {
+        $result = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(array('username' => 'Fabien'));
+        $this->entityManager->close();
+        return $result;
+    }
+
+    public function testUserEditActionWithAdminRoles()
+    {
+        $client = $this->login('Yohann','dev') ;
+        $crawler = $client->request('GET', '/users/'.$this->searchUser()->getId().'/edit');
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
+
+    public function testUserListActionWithAdminRoles()
+    {
         $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/users');
         $this->assertEquals(200, $client->getResponse()->getStatusCode()); // redirect
     }
 
-    public function testUserCreateActionWithAdminRoles(){
+    public function testUserCreateActionWithAdminRoles()
+    {
         $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/users/create');
         $this->assertEquals(200, $client->getResponse()->getStatusCode()); // redirect
     }
 
-    public function testFormCreateActionUser(){
+    public function testFormCreateActionUser()
+    {
         $client = $this->login('Yohann','dev') ;
         $crawler = $client->request('GET', '/users/create');
 
@@ -30,21 +64,13 @@ class UserControllerTest extends BaseWebTest
         $form['user[Roles]'] = 'ROLE_USER';
 
         $crawler = $client->submit($form);
-
-        $client->followRedirect();
-
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testUserEditActionWithAdminRoles(){
+    public function testFormEditActionUser()
+    {
         $client = $this->login('Yohann','dev') ;
-        $client->request('GET', '/users/55/edit');
-        $this->assertEquals(200, $client->getResponse()->getStatusCode()); // redirect
-    }
-
-    public function testFormEditActionUser(){
-        $client = $this->login('Yohann','dev') ;
-        $crawler = $client->request('GET', '/users/56/edit');
+        $crawler = $client->request('GET', '/users/'.$this->searchUser()->getId().'/edit');
 
         $form = $crawler->selectButton('Modifier')->form();
         $form['user[username]'] = 'Fabien';
@@ -54,7 +80,6 @@ class UserControllerTest extends BaseWebTest
         $form['user[Roles]'] = 'ROLE_USER';
 
         $crawler = $client->submit($form);
-
         $client->followRedirect();
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
