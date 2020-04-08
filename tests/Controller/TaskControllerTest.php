@@ -73,6 +73,20 @@ class TaskControllerTest extends BaseWebTest
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
+    // Todo delete task
+    public function testTaskDeleteNoAuthorization(){
+        $client = $this->login('Fabien','dev') ;
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(array('username' => 'Kevin'));
+        $task = $this->entityManager
+            ->getRepository(Task::class)
+            ->findOneBy(array('author' => $user));
+        $this->entityManager->close();
+        $client->request('GET', '/tasks/'.$task->getId().'/delete');
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+    }
+
     public function testEditActionTaskPage()
     {
         $client = $this->login('Yohann','dev') ;

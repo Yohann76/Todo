@@ -30,6 +30,16 @@ class UserControllerTest extends BaseWebTest
         return $result;
     }
 
+    private function searchAllUser()
+    {
+        $result = $this->entityManager
+            ->getRepository(User::class)
+            ->findAll();
+        //dd($result);
+        $this->entityManager->close();
+        return $result;
+    }
+
     public function testUserEditActionWithAdminRoles()
     {
         $client = $this->login('Yohann','dev') ;
@@ -64,7 +74,6 @@ class UserControllerTest extends BaseWebTest
         $form['user[Roles]'] = 'ROLE_USER';
 
         $crawler = $client->submit($form);
-        //$this->assertEquals(200, $client->getResponse()->getStatusCode());
         $this->assertFalse($client->getResponse()->isSuccessful());
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
