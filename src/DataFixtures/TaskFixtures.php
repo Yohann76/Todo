@@ -27,25 +27,28 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
         $task2->setContent('dev');
         $manager->persist($task2);
 
-        // Task with User
-        $task3 = new Task();
-        $task3->setTitle('Add Datafixtures');
-        $task3->setContent('dev');
-        $task3->setAuthor($this->getReference('YOHANN'));
-        $manager->persist($task3);
 
-        $task4 = new Task();
-        $task4->setTitle('Add functions');
-        $task4->setContent('dev');
-        $task4->setAuthor($this->getReference('KEVIN'));
+        for($i = 1; $i <=18; $i++) {
+            $task3 = new Task();
+            $task3->setTitle('Add Datafixtures');
+            $task3->setContent('dev');
+            $task3->setAuthor($this->getReference('YOHANN'));
+            $manager->persist($task3);
 
-        $manager->persist($task4);
 
-        $task5 = new Task();
-        $task5->setTitle('Add user');
-        $task5->setContent('dev');
-        $task5->setAuthor($this->getReference('FABIEN'));
-        $manager->persist($task5);
+            $task4 = new Task();
+            $task4->setTitle('Add functions');
+            $task4->setContent('dev');
+            $task4->setAuthor($this->getReference('KEVIN'));
+
+            $manager->persist($task4);
+
+            $task5 = new Task();
+            $task5->setTitle('Add user');
+            $task5->setContent('dev');
+            $task5->setAuthor($this->getReference('FABIEN'));
+            $manager->persist($task5);
+        }
 
         $manager->flush();
     }

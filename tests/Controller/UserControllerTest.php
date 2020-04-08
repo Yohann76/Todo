@@ -57,14 +57,16 @@ class UserControllerTest extends BaseWebTest
         $crawler = $client->request('GET', '/users/create');
 
         $form = $crawler->selectButton('Ajouter')->form();
-        $form['user[username]'] = 'UserTest';
+        $form['user[username]'] = 'UserTest'.rand(100,100000000);
         $form['user[password][first]'] = 'dev';
         $form['user[password][second]'] = 'dev';
-        $form['user[email]'] = 'UserTest@gmail.com';
+        $form['user[email]'] = 'hello'.rand(100,100000000).'@gmail.com';
         $form['user[Roles]'] = 'ROLE_USER';
 
         $crawler = $client->submit($form);
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        //$this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertFalse($client->getResponse()->isSuccessful());
+        $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
     public function testFormEditActionUser()
