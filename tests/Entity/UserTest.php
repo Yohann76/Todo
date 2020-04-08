@@ -25,4 +25,10 @@ class UserTestTest extends WebTestCase
         $this->user->setEmail('Lucie@gmail.com');
         $this->assertEquals('Lucie@gmail.com', $this->user->getEmail());
     }
+
+    public function testRoles()
+    {
+        $this->user->setRoles(["ROLE_USER"]);
+        $this->assertEquals(["ROLE_USER"], $this->user->getRoles());
+    }
 }

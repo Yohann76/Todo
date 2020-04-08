@@ -26,7 +26,9 @@
                         <p> Autheur : {{ task.author.username}}</p>
                     {% endif %}
                     <!-- Author Task -->
+                    le {{ task.createdAt ? task.createdAt|date('Y-m-d') : 'non défini' }}
                 </div>
+
                 <div>
                     <form action="{{ path('task_toggle', {'id' : task.id }) }}">
                         <button class="btn btn-success btn-sm pull-right">

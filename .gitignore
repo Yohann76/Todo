@@ -20,6 +20,7 @@
 .phpunit
 .phpunit.result.cache
 /phpunit.xml
+/public/data
 ###< symfony/phpunit-bridge ###
 
 /.env.local
