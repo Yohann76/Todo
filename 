@@ -1,0 +1,9 @@
+---
+vault_symfony_secret: "alexandre4001" 
+vault_mysql_password: "alexandre4001"
+sql_pass : alexandre4001
+mysql_root_password : root
+sql_user : yohann
+ssh_pass : XaJI8Rqe
+mail : yohanndurand76@gmail.com
+mail_password : rgynbwfaeafmliln
