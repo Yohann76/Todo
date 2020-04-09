@@ -12,21 +12,22 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
     {
-        $task = new Task();
-        $task->setTitle('Add Datafixtures');
-        $task->setContent('dev');
-        $manager->persist($task);
+        for($i = 1; $i <=5; $i++) {
+            $task = new Task();
+            $task->setTitle('Add Datafixtures');
+            $task->setContent('dev');
+            $manager->persist($task);
 
-        $task1 = new Task();
-        $task1->setTitle('Add functions');
-        $task1->setContent('dev');
-        $manager->persist($task1);
+            $task1 = new Task();
+            $task1->setTitle('Add functions');
+            $task1->setContent('dev');
+            $manager->persist($task1);
 
-        $task2 = new Task();
-        $task2->setTitle('Add user');
-        $task2->setContent('dev');
-        $manager->persist($task2);
-
+            $task2 = new Task();
+            $task2->setTitle('Add user');
+            $task2->setContent('dev');
+            $manager->persist($task2);
+        }
 
         for($i = 1; $i <=18; $i++) {
             $task3 = new Task();
@@ -49,7 +50,6 @@ class TaskFixtures extends Fixture implements DependentFixtureInterface
             $task5->setAuthor($this->getReference('FABIEN'));
             $manager->persist($task5);
         }
-
         $manager->flush();
     }
 

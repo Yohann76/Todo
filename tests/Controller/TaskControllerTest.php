@@ -41,15 +41,13 @@ class TaskControllerTest extends BaseWebTest
         return $result;
     }
 
-
     public function testTaskToggleDone(){
         $client = $this->login('Yohann','dev') ;
         $client->request('GET', '/tasks/'.$this->searchTasks()->getId().'/toggle');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-
-    public function testTaskDeleteWithUserROLE(){
+    public function testTaskDeleteWithUserRole(){
         $client = $this->login('Fabien','dev') ;
 
         $user = $this->entityManager
@@ -63,17 +61,20 @@ class TaskControllerTest extends BaseWebTest
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testTaskDeleteWithUserAdmin(){
+    public function testTaskDeleteWithAdminRole(){
         $client = $this->login('Yohann','dev') ;
+
+        $user = $this->entityManager
+            ->getRepository(User::class)
+            ->findOneBy(array('username' => 'Yohann'));
         $task = $this->entityManager
             ->getRepository(Task::class)
-            ->findOneBy(array('author' => null));
+            ->findOneBy(array('author' => $user)); // if admin or null ( $user or null )
         $this->entityManager->close();
         $client->request('GET', '/tasks/'.$task->getId().'/delete');
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-    // Todo delete task
     public function testTaskDeleteNoAuthorization(){
         $client = $this->login('Fabien','dev') ;
         $user = $this->entityManager
