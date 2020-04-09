@@ -62,8 +62,9 @@
       become: true
       lineinfile:
         dest: "{{ symfony_root_dir }}/.env"
-        regexp: ''
-        insertafter: ''
+        # replace
+        regexp: 'DATABASE_URL=mysql://root@localhost:3306/TodoList #Wamp'
+        # for
         line: DATABASE_URL=mysql://{{ sql_user }}:{{ sql_pass }}@localhost:3306/todolist
 
     - name: Add mail connexion information in .env file
