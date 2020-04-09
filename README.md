@@ -36,12 +36,12 @@ docker-compose up -d
 ```
 ## Deployment
 
-##### For Ansible, create your ansible/hosts.ini and ansible/templates/.env and run:
+##### For Ansible, create your ansible/hosts.ini and run:
 ```
 ansible-playbook ansible/playbook.yml -i ansible/hosts.ini --ask-vault-pass
 ```
 
-##### This website is available in "todolist.yohanndurand.fr" 
+#### This website is available in "todolist.yohanndurand.fr"
 
 ## Testing 
 For generate a coverage-html
